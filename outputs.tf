@@ -1,9 +1,5 @@
-output "datasync_vpc_endpoint" {
-  value = "${aws_vpc_endpoint.this.id}"
-}
-
 output "datasync_instance" {
-  value = "${aws_instance.this.id}"
+  value = "${data.aws_instance.datasync-instance.private_ip}"
 }
 
 output "datasync_agent" {
@@ -23,5 +19,5 @@ output "datasync_task_arn" {
 }
 
 output "cloudwatch_log_group_arn" {
-  value = "${data.aws_cloudwatch_log_group.this.arn}"
+  value = "${join(",", split(":*", aws_cloudwatch_log_group.this.arn))}"
 }
